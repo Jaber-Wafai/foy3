@@ -24,7 +24,6 @@ CREATE TABLE unvam (
     unvan_calisan_id INT NOT NULL,
     unvan CHAR(25) NOT NULL,
     unvan_tarih DATETIME NOT NULL,
-    PRIMARY KEY (unvan_calisan_id, unvan_tarih),
     FOREIGN KEY (unvan_calisan_id) REFERENCES calisanlar(calisan_id)
 );
 
@@ -33,26 +32,25 @@ CREATE TABLE ikraniye (
     ikramiye_calisan_id INT NOT NULL,
     ikramiye_ucret INT NULL,
     ikramiye_tarih DATETIME NOT NULL,
-    PRIMARY KEY (ikramiye_calisan_id, ikramiye_tarih),
     FOREIGN KEY (ikramiye_calisan_id) REFERENCES calisanlar(calisan_id)
 );
 
 
 INSERT INTO birimler (birim_id, birim_ad) VALUES
-(1, 'Yazılım'),
-(2, 'Donanım'),
-(3, 'Güvenlik');
+(1, 'YazÃ½lÃ½m'),
+(2, 'DonanÃ½m'),
+(3, 'GÃ¼venlik');
 
 
 INSERT INTO calisanlar (calisan_id, ad, soyad, maas, katilmaTarihi, calisan_birim_id) VALUES
-(1, 'İsmail', 'İçeri', 100000, '2014-02-20 00:00:00', 1),
-(2, 'Hami', 'Şahmiş', 80000, '2014-01-16 00:00:00', 1),
-(3, 'Dumuş', 'Şahin', 30000, '2014-02-20 00:00:00', 2),
-(4, 'Kağan', 'Yazar', 500000, '2014-02-20 00:00:00', 3),
-(5, 'Meryem', 'Soyaslü', 500000, '2014-06-11 10:00:00', 3),
-(6, 'Duygu', 'Akgöker', 200000, '2014-06-11 10:00:00', ),
-(7, 'Kübra', 'Seyhan', 75000, '2014-01-20 00:00:00', 1),
-(8, 'Gülcan', 'Yıldız', 90000, '2014-01-11 00:00:00', 3);
+(1, 'Ãsmail', 'ÃÃ§eri', 100000, '2014-02-20 00:00:00', 1),
+(2, 'Hami', 'ÃahmiÃ¾', 80000, '2014-01-16 00:00:00', 1),
+(3, 'DumuÃ¾', 'Ãahin', 30000, '2014-02-20 00:00:00', 2),
+(4, 'KaÃ°an', 'Yazar', 500000, '2014-02-20 00:00:00', 3),
+(5, 'Meryem', 'SoyaslÃ¼', 500000, '2014-06-11 10:00:00', 3),
+(6, 'Duygu', 'AkgÃ¶ker', 200000, '2014-06-11 10:00:00', ),
+(7, 'KÃ¼bra', 'Seyhan', 75000, '2014-01-20 00:00:00', 1),
+(8, 'GÃ¼lcan', 'YÃ½ldÃ½z', 90000, '2014-01-11 00:00:00', 3);
 
 
 INSERT INTO ikramiye (ikramiye_calisan_id, ikramiye_ucret, ikramiye_tarih) VALUES
@@ -64,20 +62,20 @@ INSERT INTO ikramiye (ikramiye_calisan_id, ikramiye_ucret, ikramiye_tarih) VALUE
 
 
 INSERT INTO unvan (unvan_calisan_id, unvan, unvan_tarih) VALUES
-(1, 'Yönetici', '2016-02-20 00:00:00'),
+(1, 'YÃ¶netici', '2016-02-20 00:00:00'),
 (2, 'Personel', '2016-06-11 00:00:00'),
 (3, 'Personel', '2016-06-11 00:00:00'),
-(4, 'Müdür', '2016-06-11 00:00:00'),
-(5, 'Yönetici Yardımcısı', '2016-06-11 00:00:00'),
+(4, 'MÃ¼dÃ¼r', '2016-06-11 00:00:00'),
+(5, 'YÃ¶netici YardÃ½mcÃ½sÃ½', '2016-06-11 00:00:00'),
 (6, 'Personel', '2016-06-11 00:00:00'),
-(7, 'Takım Lideri', '2016-06-11 00:00:00'),
-(8, 'Takım Lideri', '2016-06-11 00:00:00');
+(7, 'TakÃ½m Lideri', '2016-06-11 00:00:00'),
+(8, 'TakÃ½m Lideri', '2016-06-11 00:00:00');
 
 use foy3;
 
 SELECT ad, soyad, maas
 FROM calisanlar
-WHERE calisan_birim_id IN (SELECT birim_id FROM birimler WHERE birim_ad IN ('Yazılım', 'Donanım'));
+WHERE calisan_birim_id IN (SELECT birim_id FROM birimler WHERE birim_ad IN ('YazÃ½lÃ½m', 'DonanÃ½m'));
 
 
 SELECT ad, soyad, maas
@@ -110,7 +108,7 @@ JOIN ikramiye i ON c.calisan_id = i.ikramiye_calisan_id;
 SELECT c.ad, c.soyad, u.unvan
 FROM calisanlar c
 JOIN unvan u ON c.calisan_id = u.unvan_calisan_id
-WHERE u.unvan IN ('Yönetici', 'Müdür');
+WHERE u.unvan IN ('YÃ¶netici', 'MÃ¼dÃ¼r');
 
 
 SELECT c.ad, c.soyad, c.maas, b.birim_ad
